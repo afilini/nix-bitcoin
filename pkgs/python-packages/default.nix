@@ -7,9 +7,12 @@ let
 
   unstable = (import ../nixpkgs-pinned.nix).nixpkgs-unstable;
 in {
+  bech32 = callPackage ./bech32 {};
   bencoderpyx = callPackage ./bencoderpyx {};
   chromalog = callPackage ./chromalog {};
   coincurve = callPackage ./coincurve {};
+  embit = callPackage ./embit {};
+  lnurl = callPackage ./lnurl {};
   python-bitcointx = callPackage ./python-bitcointx { inherit (nbPkgs) secp256k1; };
   runes = callPackage ./runes {};
   sha256 = callPackage ./sha256 {};
@@ -32,6 +35,10 @@ in {
     meta = builtins.removeAttrs old.meta [ "broken" ];
   });
 
+  represent = callPackage ./represent {};
+  sqlalchemy-aio = callPackage ./sqlalchemy-aio {};
+  sse-starlette = callPackage ./sse-starlette {};
+
   ## Specific versions of packages that already exist in nixpkgs
 
   # cryptography 3.3.2, required by joinmarketdaemon
@@ -48,4 +55,9 @@ in {
 
   # pyopenssl 20.0.1, required by joinmarketdaemon
   pyopenssl = callPackage ./specific-versions/pyopenssl.nix {};
+  # recommonmark 0.7.1, required by pyln-client
+  recommonmark = callPackage ./specific-versions/recommonmark.nix { inherit (super) recommonmark; };
+
+  # sqlalchemy 1.3.23, required by lnbits
+  sqlalchemy_1_3_23 = callPackage ./specific-versions/sqlalchemy.nix {};
 }
