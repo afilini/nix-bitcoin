@@ -1,0 +1,19 @@
+commit 611c078c7bd987c19fdd2e4450b78446bc001010
+Author: Alekos Filini <alekos.filini@gmail.com>
+Date:   Wed Jul 6 12:12:17 2022 +0200
+
+    `contextfunction` has been renamed in jinja2 >= 3.0.0
+
+diff --git a/lnbits/jinja2_templating.py b/lnbits/jinja2_templating.py
+index 5abcd0bf..385703d1 100644
+--- a/lnbits/jinja2_templating.py
++++ b/lnbits/jinja2_templating.py
+@@ -21,7 +21,7 @@ class Jinja2Templates(templating.Jinja2Templates):
+         self.env = self.get_environment(loader)
+ 
+     def get_environment(self, loader: "jinja2.BaseLoader") -> "jinja2.Environment":
+-        @jinja2.contextfunction
++        @jinja2.pass_context
+         def url_for(context: dict, name: str, **path_params: typing.Any) -> str:
+             request: Request = context["request"]
+             return request.app.url_path_for(name, **path_params)

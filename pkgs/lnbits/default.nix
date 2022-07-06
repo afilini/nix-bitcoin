@@ -23,6 +23,10 @@ in stdenv.mkDerivation {
   buildInputs = [ pythonEnv ];
   dontBuild = true;
 
+  patches = [
+    ./rename-deprecated-decorator.patch
+  ];
+
   installPhase = ''
     mkdir -pv $out/{lib,bin}
 
